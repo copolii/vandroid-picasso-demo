@@ -1,6 +1,9 @@
 package ca.mahram.demo.picasso;
 
+import android.content.Context;
 import android.net.Uri;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.Random;
 
@@ -10,6 +13,8 @@ import java.util.Random;
 public final class DemoConstants {
     private DemoConstants () {
     } // no instance for you
+
+    private static Picasso picasso;
 
     private static Random randomizer = new Random ();
 
@@ -52,6 +57,17 @@ public final class DemoConstants {
         "https://lh3.googleusercontent.com/-EMUolsezUZ0/UbWWhagqiPI/AAAAAAAAVgM/0UTU-d86rR0/w1159-h652-no/IMGP0195.JPG"
       };
 
+    public static Picasso picasso (final Context context) {
+        if (null == picasso) {
+            picasso = new Picasso.Builder (context)
+                        .indicatorsEnabled (BuildConfig.DEBUG)
+                        .loggingEnabled (BuildConfig.DEBUG)
+                        .build ();
+        }
+
+        return picasso;
+    }
+
     public static String randomImageUrl () {
         return IMAGE_URIS[randomizer.nextInt (IMAGE_URIS.length)];
     }
@@ -65,7 +81,7 @@ public final class DemoConstants {
     }
 
     public static String randomInvalidImageUrl () {
-        return  randomInvalidImageUri ().toString ();
+        return randomInvalidImageUri ().toString ();
     }
 
     public static String randomValidOrInvalidImageUrl (final float threshold) {
@@ -82,5 +98,9 @@ public final class DemoConstants {
         }
 
         return randomizer.nextFloat () >= threshold ? randomImageUri () : randomInvalidImageUri ();
+    }
+
+    public static Uri getUri (final int position) {
+        return Uri.parse (IMAGE_URIS[position]);
     }
 }

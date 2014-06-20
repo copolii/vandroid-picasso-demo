@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--<item-->
-        <!--android:id="@+id/menu_next"-->
-        <!--android:icon="@drawable/ic_action_next"-->
-        <!--android:title="@string/load_next"-->
-        <!--android:showAsAction="always"/>-->
+    <item
+        android:id="@+id/menu_save"
+        android:icon="@drawable/ic_action_save"
+        android:title="@string/save"
+        android:showAsAction="always"/>
     <item
         android:id="@+id/menu_list_demo"
         android:icon="@drawable/ic_action_list"

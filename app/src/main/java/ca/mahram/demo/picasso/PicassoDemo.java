@@ -1,6 +1,8 @@
 package ca.mahram.demo.picasso;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +38,8 @@ public class PicassoDemo
 
     Picasso picasso;
 
+    private Uri currentImageUri;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -43,12 +47,10 @@ public class PicassoDemo
 
         topImage = (ImageView) findViewById (R.id.top_image);
 
-        picasso = new Picasso.Builder (this)
-                    .indicatorsEnabled (BuildConfig.DEBUG)
-                    .loggingEnabled (BuildConfig.DEBUG)
-                    .build ();
+        picasso = DemoConstants.picasso (this);
 
-        picasso.load (DemoConstants.randomImageUri ())
+        currentImageUri = DemoConstants.randomImageUri ();
+        picasso.load (currentImageUri)
                .placeholder (R.drawable.downloading)
                .error (R.drawable.error)
                .transform (new GrayscaleTransformation ())
@@ -107,8 +109,19 @@ public class PicassoDemo
     @Override public boolean onOptionsItemSelected (final MenuItem item) {
         switch (item.getItemId ()) {
             case R.id.menu_grid_demo:
+                startActivity (new Intent (this, GridDemo.class));
                 break;
             case R.id.menu_list_demo:
+                startActivity (new Intent (this, ListDemo.class));
+                break;
+            case R.id.menu_save:
+                if (resize.isChecked ()) {
+                    final int w = Integer.parseInt (width.getText ().toString ());
+                    final int h = Integer.parseInt (height.getText ().toString ());
+                    DownloadService.download (this, currentImageUri, w, h);
+                } else {
+                    DownloadService.download (this, currentImageUri, 0, 0);
+                }
                 break;
             default:
                 return super.onOptionsItemSelected (item);
@@ -132,9 +145,11 @@ public class PicassoDemo
                                 ? Float.parseFloat (chanceOfInvalid.getText ().toString ())
                                 : 0f;
 
-        final RequestCreator request = picasso.load (threshold > 0f
-                                                     ? DemoConstants.randomValidOrInvalidImageUri (threshold)
-                                                     : DemoConstants.randomImageUri ())
+        currentImageUri = threshold > 0f
+                          ? DemoConstants.randomValidOrInvalidImageUri (threshold)
+                          : DemoConstants.randomImageUri ();
+
+        final RequestCreator request = picasso.load (currentImageUri)
                                               .placeholder (R.drawable.downloading)
                                               .error (R.drawable.error);
 
