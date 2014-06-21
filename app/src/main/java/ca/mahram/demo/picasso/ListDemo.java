@@ -5,14 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-import ca.mahram.demo.picasso.R;
 
 public class ListDemo
   extends Activity {
@@ -42,14 +41,19 @@ public class ListDemo
     private class DemoListAdapter
       extends AbstractDemoAdapter {
 
-        @Override protected void bindView (final ImageView row, final Uri item) {
+        @Override protected void bindView (final View row, final Uri item) {
+            final ListRowTag tag = (ListRowTag) row.getTag ();
+
             picasso.load (item)
                    .error (R.drawable.error)
-                   .into (row);
+                   .into (tag.image);
+            tag.title.setText (item.toString ());
         }
 
-        @Override protected ImageView newView (final ViewGroup parent) {
-            return (ImageView) inflater.inflate (R.layout.item_list, parent, false);
+        @Override protected View newView (final ViewGroup parent) {
+            final View view = inflater.inflate (R.layout.item_list, parent, false);
+            view.setTag (new ListRowTag (view));
+            return view;
         }
     }
 }

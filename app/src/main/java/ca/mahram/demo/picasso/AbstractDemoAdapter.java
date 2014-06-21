@@ -23,12 +23,12 @@ public abstract class AbstractDemoAdapter extends BaseAdapter {
     }
 
     @Override public View getView (final int position, final View convertView, final ViewGroup parent) {
-        final ImageView v = null == convertView ? newView (parent) : (ImageView) convertView;
+        final View v = null == convertView ? newView (parent) : convertView;
         bindView (v, getItem (position));
         return v;
     }
 
-    protected abstract void bindView (final ImageView v, final Uri item);
+    protected abstract void bindView (final View v, final Uri item);
 
-    protected abstract ImageView newView (final ViewGroup parent);
+    protected abstract View newView (final ViewGroup parent);
 }

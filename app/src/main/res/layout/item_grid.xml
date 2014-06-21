@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="@dimen/grid_item_width"
+             android:layout_height="@dimen/grid_item_height">
 
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-           android:layout_width="@dimen/grid_item_width"
-           android:layout_height="@dimen/grid_item_height"
-           android:maxHeight="@dimen/grid_item_height"
-           android:maxWidth="@dimen/grid_item_width"
-           android:scaleType="center"
-           android:src="@drawable/default_photo"/>
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="@dimen/grid_item_width"
+        android:layout_height="@dimen/grid_item_height"
+        android:maxHeight="@dimen/grid_item_height"
+        android:maxWidth="@dimen/grid_item_width"
+        android:scaleType="center"
+        android:src="@drawable/default_photo"/>
+    <TextView
+        android:id="@android:id/title"
+        style="@style/image_title"/>
+</FrameLayout>
+
+

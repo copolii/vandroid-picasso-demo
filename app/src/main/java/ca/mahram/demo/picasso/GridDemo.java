@@ -6,10 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
@@ -50,16 +49,21 @@ public class GridDemo
             height = resources.getDimensionPixelSize (R.dimen.grid_item_height);
         }
 
-        @Override protected void bindView (final ImageView row, final Uri item) {
+        @Override protected void bindView (final View row, final Uri item) {
+            final ListRowTag tag = (ListRowTag) row.getTag ();
+
             picasso.load (item)
-              .error (R.drawable.error)
-              .resize (width, height)
-              .centerCrop ()
-              .into (row);
+                   .error (R.drawable.error)
+                   .resize (width, height)
+                   .centerCrop ()
+                   .into (tag.image);
+            tag.title.setText (item.getLastPathSegment ());
         }
 
-        @Override protected ImageView newView (final ViewGroup parent) {
-            return (ImageView) inflater.inflate (R.layout.item_grid, parent, false);
+        @Override protected View newView (final ViewGroup parent) {
+            final View view = inflater.inflate (R.layout.item_grid, parent, false);
+            view.setTag (new ListRowTag (view));
+            return view;
         }
     }
 }
