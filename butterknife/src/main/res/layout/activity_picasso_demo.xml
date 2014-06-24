@@ -1,0 +1,112 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".PicassoDemo">
+
+        <ImageView
+            android:background="@drawable/frame"
+            android:scaleType="centerInside"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/top_image"/>
+
+        <Button
+            android:id="@+id/load_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/load_next"/>
+
+        <TextView
+            android:id="@android:id/summary"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/apply_bw"
+                android:text="@string/convert_grayscale"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TableRow>
+
+                <CheckBox
+                    android:id="@+id/maybe_invalid"
+                    android:text="@string/random_invalid"
+                    android:checked="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/chance_of_invalid"
+                    android:inputType="numberDecimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:enabled="false"
+                    android:minEms="3"
+                    android:layout_weight="0"/>
+            </TableRow>
+
+            <TableRow android:gravity="center_vertical">
+
+                <TextView
+                    android:text="@string/fit_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Spinner
+                    android:id="@+id/fit_mode_spinner"
+                    android:entries="@array/fit_drop_down_values"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"/>
+            </TableRow>
+
+            <CheckBox
+                android:id="@+id/resize"
+                android:text="@string/resize"
+                android:checked="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TableRow
+                android:id="@+id/resize_row"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/width"
+                    android:inputType="number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:enabled="false"
+                    android:layout_weight="1"/>
+
+                <EditText
+                    android:id="@+id/height"
+                    android:inputType="number"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:layout_weight="1"/>
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+</ScrollView>

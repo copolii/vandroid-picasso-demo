@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fit_drop_down_values" >
+        <item>@string/none</item>
+        <item>@string/center_inside</item>
+        <item>@string/center_crop</item>
+        <item>@string/fit</item>
+    </string-array>
+
+    <string name="none">None</string>
+</resources>
