@@ -24,8 +24,10 @@ proguard/
 
 # IDEA files
 .idea
+*.iml
 
 # OS files
 Thumbs.db
 .DS_Store
+*~
 
